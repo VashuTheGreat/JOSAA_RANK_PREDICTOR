@@ -1,0 +1,17 @@
+[project]
+name = "josaa-rank-predictor"
+version = "0.1.0"
+description = "JOSAA Rank Predictor using ML"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dvc",
+]
+
+[tool.setuptools]
+packages = ["logger", "exception", "constants", "utils", "josaScrapper"]
+package-dir = {"" = ".", "josaScrapper" = "src/josaScrapper"}
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
