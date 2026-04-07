@@ -1,0 +1,4 @@
+
+feature_engineering:
+  TRAIN_TEST_SPLIT_RATIO: 0.2
+  RANDOM_STATE: 42

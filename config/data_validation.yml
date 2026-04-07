@@ -1,0 +1,11 @@
+
+columns:
+  - Institute: str
+  - Academic Program Name: str
+  - Quota: str
+  - Seat Type: str
+  - Gender: str
+  - Opening Rank: int
+  - Closing Rank: int
+  - Year: int
+  - Round: int

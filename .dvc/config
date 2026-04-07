@@ -1,4 +1,6 @@
 [core]
-    remote = local_s3
+    remote = myremote
 ['remote "local_s3"']
     url = ../s3
+['remote "myremote"']
+    url = s3://josaadataset

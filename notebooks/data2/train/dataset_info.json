@@ -1,0 +1,314 @@
+{
+  "builder_name": "csv",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "josaa_counselling_dataset",
+  "dataset_size": 99108652,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2016_round_1.csv": {
+      "num_bytes": 642213,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2016_round_2.csv": {
+      "num_bytes": 631771,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2016_round_3.csv": {
+      "num_bytes": 629678,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2016_round_4.csv": {
+      "num_bytes": 627304,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2016_round_5.csv": {
+      "num_bytes": 625080,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2016_round_6.csv": {
+      "num_bytes": 624416,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2017_round_1.csv": {
+      "num_bytes": 655694,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2017_round_2.csv": {
+      "num_bytes": 641767,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2017_round_3.csv": {
+      "num_bytes": 637721,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2017_round_4.csv": {
+      "num_bytes": 630356,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2017_round_5.csv": {
+      "num_bytes": 624928,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2017_round_6.csv": {
+      "num_bytes": 622962,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2017_round_7.csv": {
+      "num_bytes": 618737,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2018_round_1.csv": {
+      "num_bytes": 1197873,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2018_round_2.csv": {
+      "num_bytes": 1160607,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2018_round_3.csv": {
+      "num_bytes": 1140083,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2018_round_4.csv": {
+      "num_bytes": 1133173,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2018_round_5.csv": {
+      "num_bytes": 1131315,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2018_round_6.csv": {
+      "num_bytes": 1130069,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2018_round_7.csv": {
+      "num_bytes": 1122462,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2019_round_1.csv": {
+      "num_bytes": 1459438,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2019_round_2.csv": {
+      "num_bytes": 1414860,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2019_round_3.csv": {
+      "num_bytes": 1394222,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2019_round_4.csv": {
+      "num_bytes": 1387675,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2019_round_5.csv": {
+      "num_bytes": 1385543,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2019_round_6.csv": {
+      "num_bytes": 1384778,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2019_round_7.csv": {
+      "num_bytes": 1379471,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2020_round_1.csv": {
+      "num_bytes": 1561314,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2020_round_2.csv": {
+      "num_bytes": 1528963,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2020_round_3.csv": {
+      "num_bytes": 1517254,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2020_round_4.csv": {
+      "num_bytes": 1513319,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2020_round_5.csv": {
+      "num_bytes": 1511408,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2020_round_6.csv": {
+      "num_bytes": 1504685,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2021_round_1.csv": {
+      "num_bytes": 1579730,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2021_round_2.csv": {
+      "num_bytes": 1549677,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2021_round_3.csv": {
+      "num_bytes": 1544803,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2021_round_4.csv": {
+      "num_bytes": 1543395,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2021_round_5.csv": {
+      "num_bytes": 1542311,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2021_round_6.csv": {
+      "num_bytes": 1534848,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2022_round_1.csv": {
+      "num_bytes": 1691769,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2022_round_2.csv": {
+      "num_bytes": 1657727,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2022_round_3.csv": {
+      "num_bytes": 1650406,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2022_round_4.csv": {
+      "num_bytes": 1649653,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2022_round_5.csv": {
+      "num_bytes": 1648914,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2022_round_6.csv": {
+      "num_bytes": 1643726,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2023_round_1.csv": {
+      "num_bytes": 1834646,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2023_round_2.csv": {
+      "num_bytes": 1772618,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2023_round_3.csv": {
+      "num_bytes": 1760854,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2023_round_4.csv": {
+      "num_bytes": 1758860,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2023_round_5.csv": {
+      "num_bytes": 1757722,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2023_round_6.csv": {
+      "num_bytes": 1754680,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2024_round_1.csv": {
+      "num_bytes": 1979962,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2024_round_2.csv": {
+      "num_bytes": 1928566,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2024_round_3.csv": {
+      "num_bytes": 1916670,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2024_round_4.csv": {
+      "num_bytes": 1912521,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2024_round_5.csv": {
+      "num_bytes": 1909360,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2025_round_1.csv": {
+      "num_bytes": 2040096,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2025_round_2.csv": {
+      "num_bytes": 2002962,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2025_round_3.csv": {
+      "num_bytes": 1991989,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2025_round_4.csv": {
+      "num_bytes": 1990617,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2025_round_5.csv": {
+      "num_bytes": 1989356,
+      "checksum": null
+    },
+    "hf://datasets/VashuTheGreat2/JOSAA_COUNSELLING_DATASET@2f77a1f486672822602d3445a603788648ded096/josaa_scrape_2025_round_6.csv": {
+      "num_bytes": 1986224,
+      "checksum": null
+    }
+  },
+  "download_size": 86695801,
+  "features": {
+    "Institute": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "Academic Program Name": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "Quota": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "Seat Type": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "Gender": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "Opening Rank": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "Closing Rank": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "Year": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "Round": {
+      "dtype": "int64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 185804453,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 99108652,
+      "num_examples": 523387,
+      "dataset_name": "josaa_counselling_dataset"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

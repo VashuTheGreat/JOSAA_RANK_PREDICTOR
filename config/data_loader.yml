@@ -1,0 +1,13 @@
+
+columns:
+  - Institute: string
+  - Academic Program Name: string
+  - Quota: string
+  - Seat Type: string
+  - Gender: string
+  - Opening Rank: int64
+  - Closing Rank: int64
+  - Year: int64
+  - Round: int64
+
+data_files: "*.csv"  
