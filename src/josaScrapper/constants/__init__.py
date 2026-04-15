@@ -36,3 +36,9 @@ BASE_SCHEMA_FOLDER_PATH="config"
 DATA_VALIDATION_SCHEMA_NAME="data_validation.yml"
 DATA_VALIDATION_DIR_NAME="data_validation"
 DATA_VALIDATION_FILE_NAME="data_validation.yml"
+
+
+# ========================== Data Transformation ========================
+DATA_TRANSFORMATION_SCHEMA_NAME="feature_engineering.yml"
+DATA_TRANSFORMATION_DIR_NAME="data_transformation"
+OBJ_FILE_NAME="obj.pkl"

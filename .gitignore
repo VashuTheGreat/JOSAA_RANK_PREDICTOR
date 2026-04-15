@@ -211,3 +211,5 @@ s3/
 /data
 
 *.pkl
+
+artifacts/

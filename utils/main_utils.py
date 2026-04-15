@@ -3,6 +3,7 @@ import os
 from exception import MyException
 import sys
 from dataclasses import asdict
+import dill
 # traces size of every file in a folder
 def get_dir_size(path):
     total_size=0
@@ -46,3 +47,13 @@ async def write_yaml_file(file_path:str,content:object,replace:bool=False)->None
     except Exception as e:
         raise MyException(e,sys)                    
     
+async def save_object(file_path:str,obj:object)->None:
+
+    try:
+        os.makedirs(os.path.dirname(file_path),exist_ok=True)
+        with open(file_path,"wb") as file_obj:
+            dill.dump(obj,file_obj)
+
+
+    except Exception as e:
+        raise MyException(e,sys)   
