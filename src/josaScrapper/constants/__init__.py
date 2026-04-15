@@ -1,5 +1,5 @@
 
-
+import os
 # ----------------- Data Ingestion ------------
 PIPELINE_NAME="Ingestion"
 ARTIFACT_DIR="artifacts"
@@ -28,3 +28,11 @@ DATA_LOADER_CONFIG_FILE_PATH="config/data_loader.yml"
 
 # ------------------------- Feature Engineering ----------------
 FEATURE_ENGINEERING_CONFIG_FILE_PATH="config/feature_engineering.yml"
+
+
+
+# -------------------------- Data Validation ------------------
+BASE_SCHEMA_FOLDER_PATH="config"
+DATA_VALIDATION_SCHEMA_NAME="data_validation.yml"
+DATA_VALIDATION_DIR_NAME="data_validation"
+DATA_VALIDATION_FILE_NAME="data_validation.yml"

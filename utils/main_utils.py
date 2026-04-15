@@ -2,6 +2,7 @@ import yaml
 import os
 from exception import MyException
 import sys
+from dataclasses import asdict
 # traces size of every file in a folder
 def get_dir_size(path):
     total_size=0
@@ -28,3 +29,20 @@ def read_yaml_file_sync(file_path:str)->dict:
             return yaml.safe_load(f)
     except Exception as e:
         raise MyException(e,sys) 
+    
+
+async def write_yaml_file(file_path:str,content:object,replace:bool=False)->None:
+    try:
+        if replace:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        os.makedirs(os.path.dirname(file_path),exist_ok=True)
+        if hasattr(content,"__dataclass_fields__"):
+            content=asdict(content)
+        if hasattr(content,"__dict__"):
+            content=content.__dict__    
+        with open(file_path,"w") as file:
+            yaml.dump(content,file)
+    except Exception as e:
+        raise MyException(e,sys)                    
+    

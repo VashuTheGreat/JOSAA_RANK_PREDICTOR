@@ -9,3 +9,48 @@ columns:
   - Closing Rank: int
   - Year: int
   - Round: int
+
+
+
+
+numerical_columns:
+  - Opening Rank
+  - Closing Rank
+  - Year
+  - Round
+
+categorical_columns:
+  - Institute
+  - Academic Program Name
+  - Quota
+  - Seat Type
+  - Gender
+
+
+# drop_columns: 
+#   - Academic Program Name
+
+# # for data transformation
+
+
+# add_columns:
+#   appeared_candidates:
+#     2016: 1128633,
+#     2017: 1122351,
+#     2018: 1043000,
+#     2019: 1147125,
+#     2020: 1023000,
+#     2021: 939008,
+#     2022: 905590,
+#     2023: 1113325,
+#     2024: 1415110,
+#     2025: 1475103
+
+
+# encode_columns:  
+#   - city
+#   - furnishing
+
+
+# target_column:
+#   - rent  

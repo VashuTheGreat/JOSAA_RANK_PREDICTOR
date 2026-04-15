@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from src.josaScrapper.constants import *
 import os
 from datetime import datetime
+
 TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
 
 @dataclass
@@ -23,6 +24,9 @@ class DataIngestionConfig:
     train_test_split_ratio: float = DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
     # collection_name:str = DATA_INGESTION_COLLECTION_NAME    
 
+class DataValidationConfig:
+    data_validation_schema_path:str=os.path.join(BASE_SCHEMA_FOLDER_PATH,DATA_VALIDATION_SCHEMA_NAME)
+    validation_report_file_path:str=os.path.join(training_pipeline_config.artifact_dir,DATA_VALIDATION_DIR_NAME,DATA_VALIDATION_FILE_NAME)
 
 # @dataclass
 # class DataValidationConfig:
