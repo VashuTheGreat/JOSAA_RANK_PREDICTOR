@@ -42,3 +42,19 @@ DATA_VALIDATION_FILE_NAME="data_validation.yml"
 DATA_TRANSFORMATION_SCHEMA_NAME="feature_engineering.yml"
 DATA_TRANSFORMATION_DIR_NAME="data_transformation"
 OBJ_FILE_NAME="obj.pkl"
+
+
+
+# ============================== MOdel Traininig ================
+MODEL_TRAINER_DIR_NAME="training"
+MODEL_TRAINER_TRAINED_MODEL_DIR="model"
+MODEL_FILE_NAME="model.pkl"
+
+MODEL_CONFIG_FILE_NAME="model.yml"
+
+
+
+# ============================== Model Evaluation ========================
+MODEL_EVALUATION_DIR_NAME="evaluation"
+MODEL_EVALUATION_REPORT_FILE_NAME="report.json"
+MODEL_EVALUATION_SCHEMA_NAME="model_evaluation.yml"

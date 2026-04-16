@@ -25,10 +25,10 @@ class DataTransformationArtifact:
 #     mse: float
 #     mae: float
 
-# @dataclass
-# class ModelTrainerArtifact:
-#     trained_model_file_path:str 
-#     metric_artifact:RegressionMetricArtifact
+@dataclass
+class ModelTrainerArtifact:
+    trained_model_file_path:str 
+    # metric_artifact:RegressionMetricArtifact
 
 
 # @dataclass
@@ -38,3 +38,8 @@ class DataTransformationArtifact:
 #     data_transformed_artifact:DataTransformationArtifact
 #     model_trained_artifact:ModelTrainerArtifact
                 
+
+@dataclass
+class ModelEvaluationArtifact:
+    model_evaluation_report_file_path:str
+    
