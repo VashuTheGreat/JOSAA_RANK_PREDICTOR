@@ -2,35 +2,41 @@
 
 set -e
 
-PROJECT_NAME="JOSAA_RANK_PREDICTOR"
-HF_USERNAME="VashuTheGreat2"   # change this
-SPACE_NAME="$PROJECT_NAME"
+HF_USERNAME="VashuTheGreat2"
+SPACE_NAME="JOSAA_RANK_PREDICTOR"
 
-echo "📁 Using current workspace (Jenkins already cloned repo)"
+echo "📁 Using Jenkins workspace..."
 pwd
 ls -la
 
-echo "🤗 Checking Hugging Face CLI..."
+echo "🤗 Checking HF CLI..."
 
-if ! command -v huggingface-cli &> /dev/null
+if command -v hf &> /dev/null
 then
-    echo "❌ HF CLI not found. Installing..."
-    pip install -U huggingface_hub
+    echo "✅ hf CLI already installed"
 else
-    echo "✅ HF CLI already installed"
+    echo "❌ hf not found. Installing via pipx..."
+
+    if ! command -v pipx &> /dev/null
+    then
+        sudo apt update
+        sudo apt install -y pipx
+        pipx ensurepath
+    fi
+
+    pipx install huggingface_hub
 fi
 
-echo "🔐 Logging into Hugging Face..."
+echo "🔐 Login to HF..."
 
-# IMPORTANT: use token instead of interactive login
 if [ -z "$HF_TOKEN" ]; then
-    echo "❌ HF_TOKEN not set! Add it in Jenkins environment variables"
+    echo "❌ HF_TOKEN not set!"
     exit 1
 fi
 
-huggingface-cli login --token $HF_TOKEN
+hf auth login --token $HF_TOKEN
 
-echo "📝 Creating/Updating README.md for Hugging Face Space..."
+echo "📝 Creating README for Docker Space..."
 
 cat > README.md <<EOF
 ---
@@ -38,28 +44,27 @@ title: $SPACE_NAME
 emoji: 🚀
 colorFrom: pink
 colorTo: purple
-sdk: gradio
+sdk: docker
 pinned: false
 license: mit
 ---
 
 # $SPACE_NAME
 
-Auto deployed via Jenkins 🚀
+Docker-based Hugging Face Space 🚀
 EOF
 
-echo "🚀 Creating Hugging Face Space (if not exists)..."
+echo "🚀 Creating HF Space (Docker)..."
 
-huggingface-cli repo create $SPACE_NAME \
+hf repo create $SPACE_NAME \
     --type space \
-    --space-sdk gradio \
-    || echo "⚠️ Space already exists, continuing..."
+    --space-sdk docker \
+    || echo "⚠️ Space already exists"
 
-echo "📤 Pushing code to Hugging Face Space..."
+echo "📤 Pushing code to HF..."
 
 HF_REPO_URL="https://huggingface.co/spaces/$HF_USERNAME/$SPACE_NAME"
 
-# Add remote if not exists
 if git remote | grep hf; then
     echo "✅ Remote already exists"
 else
@@ -67,8 +72,8 @@ else
 fi
 
 git add .
-git commit -m "Auto deploy to HF Space 🚀" || echo "No changes to commit"
+git commit -m "Deploy Docker Space 🚀" || echo "No changes to commit"
 
 git push hf main
 
-echo "✅ DONE! Your Space is live 🚀"
+echo "✅ DONE! Docker Space deployed 🚀"
