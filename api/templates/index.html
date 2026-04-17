@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JOSAA Rank Predictor — Find Your Best College</title>
+  <meta name="description" content="AI-powered JOSAA rank predictor. Get college recommendations based on your JEE rank, category, and quota." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="app">
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4f8ef7"/><stop offset="1" stop-color="#a78bfa"/>
+          </linearGradient>
+        </defs>
+        <rect width="28" height="28" rx="8" fill="url(#lg)"/>
+        <path d="M7 20L12 12L16 17L19 13L21 20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="21" cy="9" r="2.5" fill="white"/>
+      </svg>
+      JOSAA Predictor
+    </div>
+    <div class="nav-spacer"></div>
+    <span class="nav-badge">AI Powered · 2026</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-tag">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+      JEE Rank Analysis
+    </div>
+    <h1>Find Your <span>Perfect College</span><br/>With AI Predictions</h1>
+    <p class="hero-sub">Enter your JEE rank and preferences. Our ML model predicts opening &amp; closing ranks for every JOSAA institute across all categories.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num" id="stat-institutes">—</div><div class="stat-label">Institutes</div></div>
+      <div class="stat"><div class="stat-num" id="stat-programs">—</div><div class="stat-label">Programs</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">AI Driven</div></div>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <div class="main-container">
+
+    <!-- Tabs -->
+    <div class="tabs-bar" role="tablist">
+      <button class="tab-btn active" role="tab" data-tab="recommend" id="tab-recommend">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span class="btn-text">Rank Recommendations</span>
+      </button>
+      <button class="tab-btn" role="tab" data-tab="cutoff" id="tab-cutoff">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        <span class="btn-text">Cutoff Checker</span>
+      </button>
+      <button class="tab-btn" role="tab" data-tab="generate" id="tab-generate">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15A9 9 0 1 1 5.64 5.64L1 10"/></svg>
+        <span class="btn-text">Generate Predictions</span>
+      </button>
+      <button class="tab-btn" role="tab" data-tab="admin" id="tab-admin">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        <span class="btn-text">Admin</span>
+      </button>
+    </div>
+
+    <!-- ── Tab 1: Rank Recommendations ── -->
+    <div class="tab-content active" id="content-recommend">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Enter Your Details</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>JEE Rank</label>
+            <input type="number" id="rec-rank" value="5000" min="1" max="999999" />
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="rec-category">
+              <option>OPEN</option>
+              <option>OBC-NCL</option>
+              <option>SC</option>
+              <option>ST</option>
+              <option>EWS</option>
+              <option>OPEN (PwD)</option>
+              <option>OBC-NCL (PwD)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <select id="rec-gender">
+              <option>Gender-Neutral</option>
+              <option>Female-only (including Supernumerary)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Quota</label>
+            <select id="rec-quota">
+              <option value="AI">All India (AI)</option>
+              <option value="HS">Home State (HS)</option>
+              <option value="OS">Other State (OS)</option>
+              <option value="GO">Goa (GO)</option>
+              <option value="LA">Ladakh (LA)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Round</label>
+            <select id="rec-round">
+              <option value="1">Round 1</option>
+              <option value="2">Round 2</option>
+              <option value="3">Round 3</option>
+              <option value="4">Round 4</option>
+              <option value="5">Round 5</option>
+              <option value="6" selected>Round 6</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Year</label>
+            <input type="number" id="rec-year" value="2026" min="2016" max="2030" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="btn-recommend" onclick="fetchRecommendations()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span class="btn-text">Find Colleges</span>
+            <div class="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="results-wrap" id="rec-results-wrap" style="display:none;">
+        <div class="card">
+          <div class="results-header">
+            <div class="card-title" style="margin-bottom:0"><span class="dot"></span>Results</div>
+            <div class="results-count">Found <strong id="rec-count">0</strong> colleges</div>
+          </div>
+          <div class="table-wrap" id="rec-table-wrap"></div>
+        </div>
+      </div>
+      <div class="card state-box hidden" id="rec-empty">
+        <div class="icon">🔍</div>
+        <div class="msg">No colleges found for this rank &amp; filters. Try adjusting your rank or category.</div>
+      </div>
+    </div>
+
+    <!-- ── Tab 2: Cutoff Checker ── -->
+    <div class="tab-content" id="content-cutoff">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Search Cutoffs</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Category</label>
+            <select id="cut-category">
+              <option>OPEN</option>
+              <option selected>OBC-NCL</option>
+              <option>SC</option>
+              <option>ST</option>
+              <option>EWS</option>
+              <option>OPEN (PwD)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <select id="cut-gender">
+              <option>Gender-Neutral</option>
+              <option>Female-only (including Supernumerary)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Quota</label>
+            <select id="cut-quota">
+              <option value="AI">All India (AI)</option>
+              <option value="HS">Home State (HS)</option>
+              <option value="OS">Other State (OS)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>College (optional)</label>
+            <select id="cut-college">
+              <option value="">— All Institutes —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Branch (optional)</label>
+            <select id="cut-branch">
+              <option value="">— All Branches —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Year</label>
+            <input type="number" id="cut-year" value="2026" min="2016" max="2030" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="btn-cutoff" onclick="fetchCutoffs()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            <span class="btn-text">Check Cutoffs</span>
+            <div class="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="results-wrap" id="cut-results-wrap" style="display:none;">
+        <div class="card">
+          <div class="results-header">
+            <div class="card-title" style="margin-bottom:0"><span class="dot"></span>Cutoff Data</div>
+            <div class="results-count">Found <strong id="cut-count">0</strong> records</div>
+          </div>
+          <div class="table-wrap" id="cut-table-wrap"></div>
+        </div>
+      </div>
+      <div class="card state-box hidden" id="cut-empty">
+        <div class="icon">📊</div>
+        <div class="msg">No cutoff data found for these filters. Try a different college or branch name.</div>
+      </div>
+    </div>
+
+    <!-- ── Tab 3: Generate Predictions ── -->
+    <div class="tab-content" id="content-generate">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Run Prediction Pipeline</div>
+        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px; line-height:1.65;">
+          Downloads the latest model from MLflow, runs it on the complete institute data, and saves predictions for a given year. This may take a minute.
+        </p>
+        <div class="form-grid" style="max-width:400px;">
+          <div class="form-group">
+            <label>Target Year</label>
+            <input type="number" id="gen-year" value="2026" min="2016" max="2030" />
+          </div>
+          <div class="form-group">
+            <label>Appeared Candidates</label>
+            <input type="number" id="gen-candidates" value="1415110" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="btn-generate" onclick="runGenerate()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span class="btn-text">Generate Predictions</span>
+            <div class="spinner"></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="card" id="gen-steps-card" style="display:none;">
+        <div class="card-title"><span class="dot"></span>Pipeline Status</div>
+        <div class="pipeline-steps">
+          <div class="step" id="step-download">
+            <div class="step-icon">⬇️</div>
+            <div class="step-info">
+              <div class="step-name">Load Model from MLflow</div>
+              <div class="step-desc">models:/JOSAA/latest · models:/JOSAA_OBJECT/latest</div>
+            </div>
+            <div class="step-status">Waiting</div>
+          </div>
+          <div class="step" id="step-transform">
+            <div class="step-icon">⚙️</div>
+            <div class="step-info">
+              <div class="step-name">Feature Engineering</div>
+              <div class="step-desc">Extract Branch, Duration, apply transformers</div>
+            </div>
+            <div class="step-status">Waiting</div>
+          </div>
+          <div class="step" id="step-predict">
+            <div class="step-icon">🧠</div>
+            <div class="step-info">
+              <div class="step-name">Run Predictions</div>
+              <div class="step-desc">Predicting Opening &amp; Closing Rank for all programs</div>
+            </div>
+            <div class="step-status">Waiting</div>
+          </div>
+          <div class="step" id="step-save">
+            <div class="step-icon">💾</div>
+            <div class="step-info">
+              <div class="step-name">Save Results</div>
+              <div class="step-desc">Persisting predictions to CSV</div>
+            </div>
+            <div class="step-status">Waiting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Tab 4: Admin (Retrain) ── -->
+    <div class="tab-content" id="content-admin">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Admin Panel</div>
+        <div class="warning-box">
+          <div class="warn-icon">⚠️</div>
+          <p>Retraining will run the full pipeline — data ingestion, validation, transformation, model training, and evaluation. This will take several minutes and log a new model version to DagsHub MLflow.</p>
+        </div>
+        <button class="btn btn-danger" id="btn-retrain" onclick="runRetrain()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15A9 9 0 1 1 5.64 5.64L1 10"/></svg>
+          <span class="btn-text">Retrain Model</span>
+          <div class="spinner"></div>
+        </button>
+
+        <div id="retrain-log" class="log-box" style="display:none;"></div>
+      </div>
+    </div>
+
+  </div><!-- /.main-container -->
+</div><!-- /.app -->
+
+<div id="toast-container"></div>
+
+<script src="/static/js/script.js"></script>
+</body>
+</html>
