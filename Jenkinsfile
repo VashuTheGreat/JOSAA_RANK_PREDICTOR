@@ -17,17 +17,79 @@ pipeline {
             }
         }
 
-        stage('Give Permission') {
+        stage('Setup Dependencies') {
             steps {
-                echo "🔐 Giving execute permission to script..."
-                sh 'chmod +x deploye.sh'
+                echo "🔧 Setting git identity and installing HF CLI..."
+                sh '''#!/bin/bash
+set -e
+git config --global user.name "jenkins"
+git config --global user.email "jenkins@local"
+export PATH=$HOME/.local/bin:$PATH
+if ! command -v hf &> /dev/null; then
+    pip3 install --user -U huggingface_hub
+fi
+'''
             }
         }
 
-        stage('Run Deployment Script') {
+        stage('Authenticate Hugging Face') {
             steps {
-                echo "🚀 Running deployment script..."
-                sh './deploye.sh'
+                echo "🔐 Logging into Hugging Face..."
+                sh '''#!/bin/bash
+set -e
+export PATH=$HOME/.local/bin:$PATH
+hf auth login --token "$HF_TOKEN"
+'''
+            }
+        }
+
+        stage('Configure Space Meta') {
+            steps {
+                echo "📝 Injecting HF Spaces configuration into README.md..."
+                sh '''#!/bin/bash
+set -e
+TEMP_README=$(mktemp)
+cat << 'EOF' > "$TEMP_README"
+---
+title: JOSAA Rank Predictor
+emoji: 🎓
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_file: main.py
+pinned: false
+---
+
+EOF
+cat README.md >> "$TEMP_README"
+mv "$TEMP_README" README.md
+'''
+            }
+        }
+
+        stage('Create App Space') {
+            steps {
+                echo "🚀 Creating HF Space if it doesn't exist..."
+                sh '''#!/bin/bash
+set -e
+export PATH=$HOME/.local/bin:$PATH
+HF_USERNAME="VashuTheGreat2"
+SPACE_NAME="JOSAA_RANK_PREDICTOR"
+hf repos create "$HF_USERNAME/$SPACE_NAME" --type space --space-sdk docker || true
+'''
+            }
+        }
+
+        stage('Upload to HF Space') {
+            steps {
+                echo "📤 Uploading project files..."
+                sh '''#!/bin/bash
+set -e
+export PATH=$HOME/.local/bin:$PATH
+HF_USERNAME="VashuTheGreat2"
+SPACE_NAME="JOSAA_RANK_PREDICTOR"
+hf upload "$HF_USERNAME/$SPACE_NAME" . --repo-type=space
+'''
             }
         }
 
