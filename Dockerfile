@@ -5,8 +5,11 @@ WORKDIR /app
 # Copy dependency files first (better caching)
 COPY requirements.txt pyproject.toml ./
 
+# Install system dependencies required by LightGBM
+RUN apt-get update && apt-get install -y libgomp1 && rm -rf /var/lib/apt/lists/*
+
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir .
 
 # Copy rest of the application
 COPY . .
