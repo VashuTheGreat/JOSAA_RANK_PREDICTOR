@@ -22,11 +22,10 @@ HF_USERNAME="VashuTheGreat2"
 SPACE_NAME="JOSAA_RANK_PREDICTOR"
 
 echo "🚀 Creating HF Space..."
-hf repos create "$HF_USERNAME/$SPACE_NAME" --type space --sdk docker || true
+hf repos create "$HF_USERNAME/$SPACE_NAME" --type space --space-sdk docker || true
 
 echo "📤 Uploading project (NO git push)..."
-hf upload "$SPACE_NAME" . \
-  --repo-type=space \
-  --repo-id="$HF_USERNAME/$SPACE_NAME"
+hf upload "$HF_USERNAME/$SPACE_NAME" . \
+  --repo-type=space
 
 echo "✅ DEPLOY DONE 🚀"
