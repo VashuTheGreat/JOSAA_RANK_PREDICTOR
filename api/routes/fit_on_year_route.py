@@ -1,7 +1,7 @@
 import fastapi
 import fastapi
 
-
+import os
 
 import pandas as pd
 import numpy as np
@@ -63,7 +63,7 @@ async def build_sample_input(year:int=2026,appeared_candidates:int=1415110) -> A
         data = pd.DataFrame(artifact.model_predicted,columns=["Opening Rank","Closing Rank"])
         
         df = df.merge(data,left_index=True,right_index=True)
-
+        os.makedirs("api/data",exist_ok=True)
         df.to_csv(f"api/data/predicted_{year}.csv",index=False)
         return {"success":True,"message":f"Predictions for year {year} have been saved to api/data/predicted_{year}.csv"}
 
