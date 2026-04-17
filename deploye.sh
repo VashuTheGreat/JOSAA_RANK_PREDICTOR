@@ -16,7 +16,7 @@ if ! command -v hf &> /dev/null; then
 fi
 
 echo "🔐 HF Login..."
-echo "$HF_TOKEN" | hf auth login --token
+hf auth login --token "$HF_TOKEN"
 
 HF_USERNAME="VashuTheGreat2"
 SPACE_NAME="JOSAA_RANK_PREDICTOR"
