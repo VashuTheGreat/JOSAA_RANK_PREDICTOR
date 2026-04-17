@@ -190,6 +190,17 @@ class ModelEvaluationComponent:
 
         # 5. MLflow logging
         logging.info("Starting MLflow run to log params, metrics, model and artifacts")
+        
+        from src.josaScrapper.constants import MLFLOW_TRACKING_URI
+        import dagshub
+        
+        # Ensures that MLflow logs to Dagshub, falling back to local only if URI is not set
+        if MLFLOW_TRACKING_URI:
+            mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+            # Or you can do dagshub.init(repo_owner='vanshsharma7832', repo_name='JOSAA_RANK_PREDICTOR', mlflow=True) if required
+            # dagshub.init(repo_owner='vanshsharma7832', repo_name='JOSAA_RANK_PREDICTOR', mlflow=True)
+            logging.info(f"Setting MLFlow tracking URI to: {MLFLOW_TRACKING_URI}")
+            
         with mlflow.start_run():
 
             # — Model hyper-params from config/model.yml
