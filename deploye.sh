@@ -2,49 +2,13 @@
 
 set -e
 
-REPO_URL="https://github.com/VashuTheGreat/JOSAA_RANK_PREDICTOR.git"
 PROJECT_NAME="JOSAA_RANK_PREDICTOR"
-HF_USERNAME="VashuTheGreat2"   # <-- change this
+HF_USERNAME="VashuTheGreat2"   # change this
 SPACE_NAME="$PROJECT_NAME"
 
-echo "🔍 Checking Git..."
-
-if ! command -v git &> /dev/null
-then
-    echo "❌ Git not found. Installing..."
-    sudo apt update
-    sudo apt install -y git
-else
-    echo "✅ Git already installed"
-fi
-
-echo "📥 Cloning repo..."
-if [ -d "$PROJECT_NAME" ]; then
-    echo "⚠️ Directory exists, pulling latest code..."
-    cd $PROJECT_NAME
-    git pull
-else
-    git clone $REPO_URL
-    cd $PROJECT_NAME
-fi
-
-echo "🔍 Checking Docker..."
-
-if ! command -v docker &> /dev/null
-then
-    echo "❌ Docker not found. Installing..."
-    sudo apt update
-    sudo apt install -y docker.io
-
-    echo "🔧 Adding user to docker group..."
-    sudo usermod -aG docker $USER
-    newgrp docker
-else
-    echo "✅ Docker already installed"
-fi
-
-echo "🐳 Building Docker image..."
-docker build -t josaa_predictor .
+echo "📁 Using current workspace (Jenkins already cloned repo)"
+pwd
+ls -la
 
 echo "🤗 Checking Hugging Face CLI..."
 
@@ -56,46 +20,55 @@ else
     echo "✅ HF CLI already installed"
 fi
 
-echo "🔐 Login to Hugging Face"
-huggingface-cli login
+echo "🔐 Logging into Hugging Face..."
 
-echo "📝 Creating/Overriding README.md for Hugging Face Space..."
+# IMPORTANT: use token instead of interactive login
+if [ -z "$HF_TOKEN" ]; then
+    echo "❌ HF_TOKEN not set! Add it in Jenkins environment variables"
+    exit 1
+fi
+
+huggingface-cli login --token $HF_TOKEN
+
+echo "📝 Creating/Updating README.md for Hugging Face Space..."
 
 cat > README.md <<EOF
 ---
 title: $SPACE_NAME
-emoji: 🦀
+emoji: 🚀
 colorFrom: pink
 colorTo: purple
-sdk: docker
+sdk: gradio
 pinned: false
 license: mit
 ---
 
 # $SPACE_NAME
 
-This space is automatically deployed using a shell script 🚀
+Auto deployed via Jenkins 🚀
 EOF
 
-echo "🚀 Creating or updating Hugging Face Space..."
+echo "🚀 Creating Hugging Face Space (if not exists)..."
 
 huggingface-cli repo create $SPACE_NAME \
     --type space \
-    --space-sdk docker \
-    || echo "⚠️ Space may already exist, continuing..."
+    --space-sdk gradio \
+    || echo "⚠️ Space already exists, continuing..."
 
 echo "📤 Pushing code to Hugging Face Space..."
 
 HF_REPO_URL="https://huggingface.co/spaces/$HF_USERNAME/$SPACE_NAME"
 
+# Add remote if not exists
 if git remote | grep hf; then
-    echo "Remote already exists"
+    echo "✅ Remote already exists"
 else
     git remote add hf $HF_REPO_URL
 fi
 
 git add .
-git commit -m "Auto deploy with updated README" || true
+git commit -m "Auto deploy to HF Space 🚀" || echo "No changes to commit"
+
 git push hf main
 
 echo "✅ DONE! Your Space is live 🚀"
