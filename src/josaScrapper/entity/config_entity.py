@@ -5,8 +5,8 @@ from datetime import datetime
 
 from src.josaScrapper.constants import *
 
-TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
-
+# TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
+TIMESTAMP:str="timestamp"
 @dataclass
 class TrainingPipelineConfig:
     pipeline_name: str = PIPELINE_NAME
