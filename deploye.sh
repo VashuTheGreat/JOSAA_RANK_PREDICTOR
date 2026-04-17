@@ -11,9 +11,12 @@ ls -la
 
 echo "🤗 Checking HF CLI..."
 
+# FIX PATH ISSUE FIRST (IMPORTANT)
+export PATH="$PATH:/var/lib/jenkins/.local/bin"
+
 if command -v hf &> /dev/null
 then
-    echo "✅ hf CLI already installed"
+    echo "✅ hf CLI already available"
 else
     echo "❌ hf not found. Installing via pipx..."
 
@@ -21,22 +24,28 @@ else
     then
         sudo apt update
         sudo apt install -y pipx
-        pipx ensurepath
     fi
 
-    pipx install huggingface_hub
+    pipx install huggingface_hub || pipx install huggingface_hub --force
+
+    # again fix PATH after install
+    export PATH="$PATH:/var/lib/jenkins/.local/bin"
 fi
 
-echo "🔐 Login to HF..."
+echo "🔍 Verifying hf..."
+which hf || echo "⚠️ hf still not found in PATH"
+hf --help || true
+
+echo "🔐 Authenticating to Hugging Face..."
 
 if [ -z "$HF_TOKEN" ]; then
-    echo "❌ HF_TOKEN not set!"
+    echo "❌ HF_TOKEN not set in Jenkins credentials"
     exit 1
 fi
 
-hf auth login --token $HF_TOKEN
+hf auth login --token "$HF_TOKEN"
 
-echo "📝 Creating README for Docker Space..."
+echo "📝 Writing README for HF Space..."
 
 cat > README.md <<EOF
 ---
@@ -51,29 +60,29 @@ license: mit
 
 # $SPACE_NAME
 
-Docker-based Hugging Face Space 🚀
+Auto deployed via Jenkins 🚀
 EOF
 
-echo "🚀 Creating HF Space (Docker)..."
+echo "🚀 Creating HF Space (if not exists)..."
 
-hf repo create $SPACE_NAME \
+hf repo create "$SPACE_NAME" \
     --type space \
     --space-sdk docker \
     || echo "⚠️ Space already exists"
 
-echo "📤 Pushing code to HF..."
+echo "📤 Pushing to Hugging Face..."
 
 HF_REPO_URL="https://huggingface.co/spaces/$HF_USERNAME/$SPACE_NAME"
 
 if git remote | grep hf; then
-    echo "✅ Remote already exists"
+    echo "✅ HF remote already exists"
 else
-    git remote add hf $HF_REPO_URL
+    git remote add hf "$HF_REPO_URL"
 fi
 
 git add .
-git commit -m "Deploy Docker Space 🚀" || echo "No changes to commit"
+git commit -m "🚀 Auto deploy to HF Space" || echo "No changes to commit"
 
 git push hf main
 
-echo "✅ DONE! Docker Space deployed 🚀"
+echo "🎉 DEPLOYMENT COMPLETE 🚀"
