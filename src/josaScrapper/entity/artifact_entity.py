@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional,Any
 
 @dataclass
 class DataIngestionArtifact:
@@ -41,5 +41,11 @@ class ModelTrainerArtifact:
 
 @dataclass
 class ModelEvaluationArtifact:
-    model_evaluation_report_file_path:str
-    
+    model_evaluation_report_file_path: str
+    model_evaluation_plots_dir: str
+
+
+
+@dataclass
+class ModelPredictionArtifact:
+    model_predicted:Any

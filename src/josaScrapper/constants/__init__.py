@@ -56,5 +56,18 @@ MODEL_CONFIG_FILE_NAME="model.yml"
 
 # ============================== Model Evaluation ========================
 MODEL_EVALUATION_DIR_NAME="evaluation"
-MODEL_EVALUATION_REPORT_FILE_NAME="report.json"
+MODEL_EVALUATION_REPORT_FILE_NAME="report.yaml"
 MODEL_EVALUATION_SCHEMA_NAME="model_evaluation.yml"
+MODEL_EVALUATION_PLOTS_DIR_NAME="plots"
+
+
+
+# ========================= Prediction ============================
+MLFLOW_TRACKING_URI=os.getenv('ML_FLOW_TRACKING_URI')
+MLFLOW_TRACKING_USERNAME=os.getenv("MLFLOW_TRACKING_USERNAME")
+MLFLOW_TRACKING_PASSWORD=os.getenv("MLFLOW_TRACKING_PASSWORD")
+MLFLOW_MODEL_URI= os.getenv("MLFLOW_MODEL_URI")
+MLFLOW_MODEL_OBJECT_URI = os.getenv("MLFLOW_MODEL_OBJECT_URI")
+SAVED_MODEL_DIR_NAME="saved_model"
+MODEL_NAME="model.pkl"
+SAVED_OBJECT_NAME="obj.pkl"

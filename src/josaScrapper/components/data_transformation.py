@@ -30,13 +30,16 @@ class DataTransformationComponent:
             self.data_transformation_config.data_transformation_schema_path
         )
 
-        self.standarizer_en={}
+        self.standarizer_en={
+            "scalers": {},        # {col: StandardScaler}  — for standardize step
+            "encoding_maps": {},  # full-data global encoding maps  — for predict-time encoding
+        }
     @asyncHandler
     async def StandardizeColumn(self, df: pd.DataFrame, col: str):
         df[col] = pd.to_numeric(df[col], errors='coerce')
         sts=StandardScaler()
         sts.fit(df[[col]])
-        self.standarizer_en[col]=sts
+        self.standarizer_en["scalers"][col]=sts
         standardized = sts.transform(df[[col]]).flatten()
         return standardized
 
@@ -108,7 +111,7 @@ class DataTransformationComponent:
         df['appeared_candidates']=df['Year'].map(participants_map)
         
         # Extract Branch and Duration from Academic Program Name
-        df['Branch'] = df['Academic Program Name'].str.split(' \(').str[0]
+        df['Branch'] = df['Academic Program Name'].str.split(r' \(').str[0]
         df['Duration'] = pd.to_numeric(df['Academic Program Name'].str.extract(r'\((\d+)\s+Years').iloc[:, 0], errors='coerce')
         
         return df
@@ -146,7 +149,52 @@ class DataTransformationComponent:
                     random_state=self._schema['hybrid_encode']['random_state']
                 )
 
-        return df   
+        return df
+
+    async def _compute_encoding_maps(self, train_df: pd.DataFrame):
+        """Compute full-data global encoding maps on train_df for use at prediction time.
+        KFold encoding (above) is leakage-free for training; these global maps are
+        the equivalent needed to encode unseen data at inference."""
+        target_cols = self._schema['hybrid_encode']['target']
+        alpha       = self._schema['hybrid_encode']['alpha']
+        maps        = {}
+
+        # hybrid columns  
+        for col in self._schema['hybrid_encode']['columns']:
+            temp_target = train_df[target_cols].mean(axis=1)
+            global_mean = float(temp_target.mean())
+            means  = train_df.groupby(col)[target_cols].mean().mean(axis=1)
+            counts = train_df[col].value_counts()
+            smooth = (means * counts + global_mean * alpha) / (counts + alpha)
+            maps[col] = {
+                "target_map":  smooth.to_dict(),
+                "freq_map":    counts.to_dict(),
+                "global_mean": global_mean,
+                "type":        "hybrid",
+            }
+
+        # target-only columns  
+        for col in self._schema['target_encode']['columns']:
+            temp_target = train_df[target_cols].mean(axis=1)
+            global_mean = float(temp_target.mean())
+            means  = train_df.groupby(col)[target_cols].mean().mean(axis=1)
+            counts = train_df[col].value_counts()
+            smooth = (means * counts + global_mean * alpha) / (counts + alpha)
+            maps[col] = {
+                "target_map":  smooth.to_dict(),
+                "global_mean": global_mean,
+                "type":        "target",
+            }
+
+        # one-hot column categories  
+        for col in self._schema['one_hot_encode']['columns']:
+            maps[col] = {
+                "categories": sorted(train_df[col].unique().tolist()),
+                "type":       "ohe",
+            }
+
+        self.standarizer_en["encoding_maps"] = maps
+        logging.info("Encoding maps computed and stored — cols: %s", list(maps.keys()))
 
 
     @asyncHandler
@@ -195,14 +243,18 @@ class DataTransformationComponent:
         # ============= incoding cols ============================
 
         logging.info("Encoding Train")
-        await self.encode_col(train_df,type='hybrid')
-        await self.encode_col(train_df,type='target')
-        await self.encode_col(train_df,type='oneHot')
+        train_df = await self.encode_col(train_df,type='hybrid')
+        train_df = await self.encode_col(train_df,type='target')
+        train_df = await self.encode_col(train_df,type='oneHot')
 
         logging.info("Encoding Test")
-        await self.encode_col(test_df,type='hybrid')
-        await self.encode_col(test_df,type='target')
-        await self.encode_col(test_df,type='oneHot')
+        test_df = await self.encode_col(test_df,type='hybrid')
+        test_df = await self.encode_col(test_df,type='target')
+        test_df = await self.encode_col(test_df,type='oneHot')
+
+        # ── compute global encoding maps (for prediction time) ─────────────
+        logging.info("Computing global encoding maps for prediction...")
+        await self._compute_encoding_maps(train_df)
 
 
         # =================== Droping Cols =================

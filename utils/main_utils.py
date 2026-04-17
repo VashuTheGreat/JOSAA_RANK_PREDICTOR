@@ -57,3 +57,12 @@ async def save_object(file_path:str,obj:object)->None:
 
     except Exception as e:
         raise MyException(e,sys)   
+
+async def load_object(file_path:str)->object:
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(f"The file: {file_path} does not exist")
+        with open(file_path,"rb") as file_obj:
+            return dill.load(file_obj)
+    except Exception as e:
+        raise MyException(e,sys)

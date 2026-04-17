@@ -1,0 +1,6 @@
+# Model Evaluation Schema
+# Defines which target columns to evaluate
+
+targets:
+  - Opening Rank
+  - Closing Rank

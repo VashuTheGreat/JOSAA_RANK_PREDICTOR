@@ -1,8 +1,9 @@
 import logging
-from dataclasses import dataclass
-from src.josaScrapper.constants import *
 import os
+from dataclasses import dataclass
 from datetime import datetime
+
+from src.josaScrapper.constants import *
 
 TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
 
@@ -13,8 +14,13 @@ class TrainingPipelineConfig:
     timestamp: str = TIMESTAMP
 
 
-training_pipeline_config:TrainingPipelineConfig=TrainingPipelineConfig()
-logging.info(f"TrainingPipelineConfig initialized — pipeline: '{training_pipeline_config.pipeline_name}', artifact_dir: '{training_pipeline_config.artifact_dir}', timestamp: '{training_pipeline_config.timestamp}'")
+training_pipeline_config: TrainingPipelineConfig = TrainingPipelineConfig()
+logging.info(
+    f"TrainingPipelineConfig initialized — pipeline: '{training_pipeline_config.pipeline_name}', "
+    f"artifact_dir: '{training_pipeline_config.artifact_dir}', "
+    f"timestamp: '{training_pipeline_config.timestamp}'"
+)
+
 @dataclass
 class DataIngestionConfig:
     data_ingestion_dir: str = os.path.join(training_pipeline_config.artifact_dir, DATA_INGESTION_DIR_NAME)
@@ -22,54 +28,47 @@ class DataIngestionConfig:
     training_file_path: str = os.path.join(data_ingestion_dir, DATA_INGESTION_INGESTED_DIR, TRAIN_FILE_NAME)
     testing_file_path: str = os.path.join(data_ingestion_dir, DATA_INGESTION_INGESTED_DIR, TEST_FILE_NAME)
     train_test_split_ratio: float = DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
-    # collection_name:str = DATA_INGESTION_COLLECTION_NAME    
 
 @dataclass
 class DataValidationConfig:
-    data_validation_schema_path:str=os.path.join(BASE_SCHEMA_FOLDER_PATH,DATA_VALIDATION_SCHEMA_NAME)
-    validation_report_file_path:str=os.path.join(training_pipeline_config.artifact_dir,DATA_VALIDATION_DIR_NAME,DATA_VALIDATION_FILE_NAME)
+    data_validation_schema_path: str = os.path.join(BASE_SCHEMA_FOLDER_PATH, DATA_VALIDATION_SCHEMA_NAME)
+    validation_report_file_path: str = os.path.join(training_pipeline_config.artifact_dir, DATA_VALIDATION_DIR_NAME, DATA_VALIDATION_FILE_NAME)
 
 @dataclass
 class DataTransformationConfig:
     data_transformation_dir: str = os.path.join(training_pipeline_config.artifact_dir, DATA_TRANSFORMATION_DIR_NAME)
-
-    data_transformation_schema_path:str=os.path.join(BASE_SCHEMA_FOLDER_PATH,DATA_TRANSFORMATION_SCHEMA_NAME)
+    data_transformation_schema_path: str = os.path.join(BASE_SCHEMA_FOLDER_PATH, DATA_TRANSFORMATION_SCHEMA_NAME)
     training_file_path: str = os.path.join(data_transformation_dir, DATA_INGESTION_INGESTED_DIR, TRAIN_FILE_NAME)
     testing_file_path: str = os.path.join(data_transformation_dir, DATA_INGESTION_INGESTED_DIR, TEST_FILE_NAME)
-    obj_file_path:str=os.path.join(data_transformation_dir, DATA_INGESTION_INGESTED_DIR, OBJ_FILE_NAME)
+    obj_file_path: str = os.path.join(data_transformation_dir, DATA_INGESTION_INGESTED_DIR, OBJ_FILE_NAME)
 
 
-# @dataclass
-# class DataValidationConfig:
-#     data_validation_dir:str=os.path.join(training_pipeline_config.artifact_dir,DATA_VALIDATION_DIR_NAME)
-#     validation_report_file_path:str=os.path.join(data_validation_dir,DATA_VALIDATION_REPORT_FILE_NAME)
-
-
-# @dataclass
-# class DataTransformationConfig:
-#     data_transformation_dir:str=os.path.join(training_pipeline_config.artifact_dir,DATA_TRANSFORMATION_DIR)
-#     transformed_train_file_path:str=os.path.join(data_transformation_dir,TRANSFORMED_TRAIN_FILE_PATH)
-#     transformed_test_file_path:str=os.path.join(data_transformation_dir,TRANSFORMED_TEST_FILE_PATH)
-#     transformed_object_file_path:str=os.path.join(data_transformation_dir,TRANSFORMED_OBJECT_FILE_PATH)
-
-
- 
 @dataclass
 class ModelTrainerConfig:
     model_trainer_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_TRAINER_DIR_NAME)
     trained_model_file_path: str = os.path.join(model_trainer_dir, MODEL_TRAINER_TRAINED_MODEL_DIR, MODEL_FILE_NAME)
-    model_config_file_path:str=os.path.join(BASE_SCHEMA_FOLDER_PATH,MODEL_CONFIG_FILE_NAME)
-    # expected_accuracy: float = MODEL_TRAINER_EXPECTED_SCORE
-    # model_config_file_path: str = MODEL_TRAINER_MODEL_CONFIG_FILE_PATH
-    # n_estimators = MODEL_TRAINER_N_ESTIMATORS
-    # min_samples_split = MODEL_TRAINER_MIN_SAMPLES_SPLIT
-    # min_samples_leaf = MODEL_TRAINER_MIN_SAMPLES_LEAF
-    # max_depth = MIN_SAMPLES_SPLIT_MAX_DEPTH
-    # criterion = MIN_SAMPLES_SPLIT_CRITERION
-    # random_state = MIN_SAMPLES_SPLIT_RANDOM_STATE
+    model_config_file_path: str = os.path.join(BASE_SCHEMA_FOLDER_PATH, MODEL_CONFIG_FILE_NAME)
 
 @dataclass
 class ModelEvaluationConfig:
-    model_evaluation_dir:str=os.path.join(training_pipeline_config.artifact_dir,MODEL_EVALUATION_DIR_NAME)
-    model_evaluation_report_file_path:str=os.path.join(model_evaluation_dir,MODEL_EVALUATION_REPORT_FILE_NAME)
-    model_evaluation_schema_path:str=os.path.join(BASE_SCHEMA_FOLDER_PATH,MODEL_EVALUATION_SCHEMA_NAME)
+    model_evaluation_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME)
+    model_evaluation_report_file_path: str = os.path.join(model_evaluation_dir, MODEL_EVALUATION_REPORT_FILE_NAME)
+    model_evaluation_schema_path: str = os.path.join(BASE_SCHEMA_FOLDER_PATH, MODEL_EVALUATION_SCHEMA_NAME)
+    model_evaluation_plots_dir: str = os.path.join(model_evaluation_dir, MODEL_EVALUATION_PLOTS_DIR_NAME)
+
+
+@dataclass
+class ModelPredictionConfig:
+    saved_model_dir: str = os.path.join(training_pipeline_config.artifact_dir, SAVED_MODEL_DIR_NAME)
+
+    # Main regression model  — JOSAA/1
+    model_uri: str = MLFLOW_MODEL_URI
+    local_model_path: str = os.path.join(saved_model_dir, MODEL_NAME)
+
+    # Transformation object  — JOSAA_OBJECT/1
+    model_object_uri: str = MLFLOW_MODEL_OBJECT_URI
+    local_object_path: str = os.path.join(saved_model_dir, SAVED_OBJECT_NAME)
+
+    mlflow_tracking_uri: str = MLFLOW_TRACKING_URI
+    mlflow_username: str = MLFLOW_TRACKING_USERNAME
+    mlflow_password: str = MLFLOW_TRACKING_PASSWORD
