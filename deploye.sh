@@ -21,6 +21,23 @@ hf auth login --token "$HF_TOKEN"
 HF_USERNAME="VashuTheGreat2"
 SPACE_NAME="JOSAA_RANK_PREDICTOR"
 
+echo "📝 Injecting HF Spaces configuration into README.md..."
+TEMP_README=$(mktemp)
+cat << 'EOF' > "$TEMP_README"
+---
+title: JOSAA Rank Predictor
+emoji: 🎓
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_file: main.py
+pinned: false
+---
+
+EOF
+cat README.md >> "$TEMP_README"
+mv "$TEMP_README" README.md
+
 echo "🚀 Creating HF Space..."
 hf repos create "$HF_USERNAME/$SPACE_NAME" --type space --space-sdk docker || true
 
