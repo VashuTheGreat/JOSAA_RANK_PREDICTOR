@@ -66,8 +66,6 @@ class ModelEvaluationComponent:
             self.data_transformation_artifact.transformed_test_file_path,
         )
 
-        dagshub.init(repo_owner="vanshsharma7832", repo_name="JOSAA_RANK_PREDICTOR", mlflow=True)
-
     
     # Helper Functions
     def _load_model(self):
